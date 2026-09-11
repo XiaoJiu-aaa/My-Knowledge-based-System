@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"219cdadf8e48e97b","type":"text","text":"### 与门\nA16·A17 → G1\n\n(A16=A17=1 时 G1=1)","x":-410,"y":144,"width":180,"height":175,"color":"6"},
+		{"id":"f89e001ef01a19c5","type":"text","text":"## 控制信号\n**MEMR** ──→ SRAM OE\n**MEMW** ──→ SRAM WE","x":200,"y":510,"width":250,"height":120,"color":"1"},
+		{"id":"dc7a038b02e91bd8","type":"text","text":"## 74LS138 译码器\n\nG1 ─── A16·A17 (与门)\nG2A ── A19\nG2B ── GND\n\nC ──── A13\nB ──── A14\nA ──── A15\n\nCBA=100 → **Y4=0**\n\n其他输出(Y0~Y3,Y5~Y7)悬空","x":-445,"y":480,"width":245,"height":360,"color":"4"},
+		{"id":"eb27b681aa3c8602","type":"text","text":"# SRAM 6264 地址译码电路设计\n## 地址范围: 38000H~39FFFH & 78000H~79FFFH","x":-610,"y":-220,"width":580,"height":100},
+		{"id":"d91730a9a17ab6a1","type":"text","text":"## 系统地址总线\nA19\nA18\nA17\nA16\nA15\nA14\nA13\n─────────\nA12 ~ A0\n(13根→6264)\n─────────\nD0 ~ D7\n(8根↔6264)","x":-1100,"y":-80,"width":190,"height":390,"color":"5"},
+		{"id":"923fb9c732889805","type":"text","text":"### 验证逻辑\n\n**38000H** = 0011 1000 ...\nA19..A13 = 0 0 1 1 1 0 0 ✓\n\n**39FFFH** = 0011 1001 ...\nA19..A13 = 0 0 1 1 1 0 0 ✓\n\n**78000H** = 0111 1000 ...\nA19..A13 = 0 1 1 1 1 0 0 ✓\n\nA18 不参与译码 → 两段地址均命中 Y4","x":620,"y":0,"width":340,"height":310},
+		{"id":"3d8df465b887883f","type":"text","text":"## SRAM 6264 (8K×8位)\n\n**A0~A12** ← 系统 A0~A12\n**D0~D7** ↔ 系统 D0~D7\n**CS** ← 74LS138 Y4\n**OE** ← MEMR\n**WE** ← MEMW\n\n片内寻址: 2¹³ = 8KB","x":200,"y":-15,"width":250,"height":275,"color":"2"}
+	],
+	"edges":[
+		{"id":"8eeeeadce1ac8cb1","fromNode":"d91730a9a17ab6a1","fromSide":"right","toNode":"dc7a038b02e91bd8","toSide":"left","label":"A19→G2A, A15→A, A14→B, A13→C"},
+		{"id":"c86408f4fc4ee20b","fromNode":"d91730a9a17ab6a1","fromSide":"right","toNode":"219cdadf8e48e97b","toSide":"left","label":"A16, A17 → 与门"},
+		{"id":"911938e83efa493a","fromNode":"219cdadf8e48e97b","fromSide":"bottom","toNode":"dc7a038b02e91bd8","toSide":"top","label":"A16·A17 → G1"},
+		{"id":"cd3bf8736f9f19ec","fromNode":"d91730a9a17ab6a1","fromSide":"right","toNode":"3d8df465b887883f","toSide":"left","label":"A12~A0 → SRAM, D0~D7 ↔ SRAM"},
+		{"id":"fbd3ccee4c89e764","fromNode":"dc7a038b02e91bd8","fromSide":"right","toNode":"3d8df465b887883f","toSide":"left","label":"Y4 → CS"},
+		{"id":"352086bbaccabc84","fromNode":"f89e001ef01a19c5","fromSide":"top","toNode":"3d8df465b887883f","toSide":"bottom","label":"MEMR→OE, MEMW→WE"}
+	]
+}

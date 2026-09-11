@@ -1,0 +1,23 @@
+{
+	"nodes":[
+		{"id":"0cd541b07ae86343","type":"group","x":-480,"y":-140,"width":1400,"height":720,"label":"逻辑存储结构"},
+		{"id":"015389682f1f882d","type":"group","x":210,"y":-37,"width":400,"height":400,"label":"Extent"},
+		{"id":"bb829557828f2a90","type":"group","x":-440,"y":163,"width":220,"height":277,"label":"Row"},
+		{"id":"1683558378fdc2e0","type":"group","x":-440,"y":-54,"width":250,"height":134,"label":"Tablespace"},
+		{"id":"6d314eec24e45a6e","type":"group","x":-120,"y":-37,"width":200,"height":100,"label":"Segment"},
+		{"id":"d91f200b41f944cc","type":"group","x":-120,"y":320,"width":297,"height":157,"label":"Page"},
+		{"id":"3eb3a5a969ec9b1a","type":"text","text":"# Row Row Row\n# Row Row Row\n# Row Row Row","x":-120,"y":320,"width":297,"height":157,"color":"5"},
+		{"id":"99750c7e5d129d13","type":"text","text":"# Page Page Page Page \n# Page Page Page Page \n# Page Page Page Page \n# Page Page Page Page \n# Page Page Page Page \n# Page Page Page Page \n# Page Page Page Page \n.....................................","x":210,"y":-37,"width":400,"height":400,"color":"4"},
+		{"id":"d85637f03a648470","type":"text","text":"### Extent Extent\n### Extent     Extent","x":-120,"y":-37,"width":200,"height":100,"color":"#dda769"},
+		{"id":"79121d05bc763bc0","type":"text","text":"##### Segment\n##### Segment\n##### Segment","x":-440,"y":-54,"width":250,"height":134,"color":"2"},
+		{"id":"bfd85ef5d8e3a9b2","type":"text","text":"#### Trx id\n#### Roll pointer\n#### col1\n#### col2\n#### col3\n...","x":-439,"y":163,"width":219,"height":277,"color":"6"},
+		{"id":"ee6d1e0f7a1fbe14","type":"file","file":"MySQL/asserts/InnoDB架构图.jpg","x":1120,"y":-134,"width":1400,"height":995,"color":"#b93737"},
+		{"id":"c479b8d63e6187c9","type":"text","text":"· TableSpace :表空间\n·Segment:段\n·Extent:区\n·Page:页\n·Row:行","x":640,"y":63,"width":250,"height":157,"color":"3"}
+	],
+	"edges":[
+		{"id":"ede9a6ea8f1ffb80","fromNode":"79121d05bc763bc0","fromSide":"right","toNode":"d85637f03a648470","toSide":"left"},
+		{"id":"fadbadebda720d1c","fromNode":"d85637f03a648470","fromSide":"right","toNode":"015389682f1f882d","toSide":"left"},
+		{"id":"fb24a18adb23a641","fromNode":"99750c7e5d129d13","fromSide":"bottom","toNode":"d91f200b41f944cc","toSide":"right"},
+		{"id":"fd270b9338195fa5","fromNode":"3eb3a5a969ec9b1a","fromSide":"left","toNode":"bb829557828f2a90","toSide":"right"}
+	]
+}

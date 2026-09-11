@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"fa419c2b5d3178cc","type":"group","x":-4900,"y":-2760,"width":780,"height":395,"color":"5","label":"场景1"},
+		{"id":"98a235e7d975cc7f","type":"group","x":-4900,"y":-2080,"width":780,"height":360,"color":"6","label":"场景2"},
+		{"id":"54ebe9955d405248","type":"group","x":-4040,"y":-2440,"width":780,"height":340,"color":"3","label":"场景3"},
+		{"id":"c5a4d24d9adac350","type":"text","text":"1. 检查 **E**（自身 LOCAL）——通过。\n    \n2. E 看直接下层 D，D 写了 `CHECK OPTION`（CASCADED）→ 允许进入 D。\n    \n3. 检查 **D**（自身 CASCADED）——通过。\n    \n4. **因为 D 是 CASCADED，它强制检查其下的所有依赖（C、B、A）**，无视它们自己的设置。\n    \n5. 检查 **C**（虽为 LOCAL，但被 D 强制拉下水）——通过。\n    \n6. 检查 **B**（虽未写，但被 D 强制拉下水，若 B 无 WHERE 条件则直接忽略）——通过。\n    \n7. 检查 **A**（虽为 LOCAL，但被 D 强制拉下水）——通过。\n    \n\n**结论**：检查了 **E、D、C、B、A**（全检），因为 `CASCADED` 起了“连坐”效果。","x":-4880,"y":-2675,"width":740,"height":280},
+		{"id":"f61643b1d97d7975","type":"text","text":"###### E(local)->D(cascaded)->C(local)->B(无)->A(local)","x":-4880,"y":-2740,"width":460,"height":50},
+		{"id":"880df62d2a63a29f","type":"text","text":"##### E(LOCAL) → D(无) → C(CASCADED) → B(LOCAL) → A(LOCAL)","x":-4880,"y":-2060,"width":580,"height":60},
+		{"id":"994527c7fa4c01f9","x":-4000,"y":-2425,"width":520,"height":60,"type":"text","text":"E(CASCADED) → D(LOCAL) → C(无) → B(LOCAL) → A(LOCAL)"},
+		{"id":"2c3bfdc202273632","type":"text","text":"1. 检查 **E**（自身 LOCAL）——通过。\n    \n2. E 看直接下层 D，发现 D **没有写** `WITH CHECK OPTION`。\n    \n3. **因为 E 是 LOCAL，它不会强制进入没有写的下层，直接在此处“短路”终止。**\n    \n4. 结果：底下的 C（即使是 CASCADED）、B、A **根本不会被触发检查**。\n    \n\n**结论**：只检查了 **E**。即使 C 写了强制的 `CASCADED`，但因为顶层 `LOCAL` 被 D 挡住，下面的强制选项无法“穿透”上来。","x":-4880,"y":-1960,"width":741,"height":220},
+		{"id":"a36867e978cd8ae1","x":-4000,"y":-2320,"width":630,"height":120,"type":"text","text":"- E 检查自身，然后因为 E 是 `CASCADED`，**强制检查其下所有依赖（D、C、B、A）**。\n    \n- 结论：**全检**。顶层的 `CASCADED` 直接把整条链子上的所有视图全拉下水"}
+	],
+	"edges":[]
+}
